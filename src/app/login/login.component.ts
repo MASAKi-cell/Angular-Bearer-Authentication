@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import { FormGroup, FormControl,Validators, ValidationErrors } from '@angular/forms';
+import { FormBuilder,FormGroup, FormControl,Validators, ValidationErrors } from '@angular/forms';
+import { first } from 'rxjs/operators';
+import { AuthenticationService } from 'src/app/_service/authentication.service';
 
 @Component({
   selector: 'app-root',
@@ -8,13 +10,16 @@ import { FormGroup, FormControl,Validators, ValidationErrors } from '@angular/fo
 })
 export class LoginComponent implements OnInit {
   public loginForm!: FormGroup;
+  public loading: boolean = false;
 
-  constructor() { }
+  constructor(
+    private fb: FormBuilder,
+  ) { }
 
   ngOnInit(): void {
-    this.loginForm = new FormGroup({
-      username: new FormControl('',[Validators.required,Validators.maxLength(225)]),
-      password: new FormControl('',[Validators.minLength(8),Validators.maxLength(24),this.oneCharacters as any,this.alphanumerics as any])
+    this.loginForm = this.fb.group({
+      username: ['',Validators.required,Validators.maxLength(225)],
+      password: ['',Validators.minLength(8),Validators.maxLength(24),this.oneCharacters as any,this.alphanumerics as any]
     })
   }
   //カスタムバリデータ
