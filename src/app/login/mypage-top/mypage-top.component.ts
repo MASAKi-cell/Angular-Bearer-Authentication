@@ -17,6 +17,7 @@ export class MypageTopComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
+    //serviceからUser情報を取得
     this.loading = true;
     this.usersrvice.getAll().pip(first()).subscribe((users: User[]) => {
       this.loading = false;
