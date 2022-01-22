@@ -8,14 +8,14 @@
   <mat-form-field class="example-full-width" appearance="outline" placeholder="ユーザー名">
     <mat-label>username</mat-label>
     <input type="email" matInput formControlName="username" placeholder="username"/>
-    <mat-error>{{userErrorMessage(form.controls.username.errors)}}</mat-error>
+    <mat-error>{{userErrorMessage(loginForm.controls.username.errors)}}</mat-error>
   </mat-form-field>
   <p>{{loginForm.controls.username.value.length}}/225</p>
   <p>パスワード：</p>
   <mat-form-field class="example-full-width" appearance="outline" placeholder="パスワード">
     <mat-label>password</mat-label>
     <input type="email" matInput formControlName="password" placeholder="username"/>
-    <mat-error>{{passwordErrorMessage(form.controls.password.errors)}}</mat-error>
+    <mat-error>{{passwordErrorMessage(loginForm.controls.password.errors)}}</mat-error>
   </mat-form-field>
   <button mat-button type="submit" routerLink="mypagetop" [disabled]="disabled()">ログイン</button>
 </form>

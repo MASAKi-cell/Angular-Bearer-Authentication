@@ -22,7 +22,12 @@ export class LoginComponent implements OnInit {
       password: ['',Validators.minLength(8),Validators.maxLength(24),this.oneCharacters as any,this.alphanumerics as any]
     })
   }
-  //カスタムバリデータ
+
+  /**
+   * 
+   * @param form 
+   * @returns 
+   */
   oneCharacters(form: FormGroup): ValidationErrors | null{
     const oneCharacter = /(?=.*[0-9])(?=.*[A-Z])(?=.*[a-z])/;
     if (oneCharacter.test(form.value)) {
@@ -49,24 +54,35 @@ export class LoginComponent implements OnInit {
     return false;
   }
 
-  userErrorMessage(errors: ValidationErrors): any{
-    if(errors.required){
+  /**
+   * Usernameのエラーハンドリング
+   * @param errors 
+   * @returns { ValidationErrors | null }
+   */
+
+  userErrorMessage(errors: ValidationErrors | null): any{
+    if(errors?.required){
       return 'ユーザー名の入力は必須です。';
-    } else if(errors.maxLength){
-      return `${errors.maxLength.requiredLength}以内で入力してください。`;
+    } else if(errors?.maxLength){
+      return `${errors?.maxLength.requiredLength}以内で入力してください。`;
     }
   } 
 
-  passwordErrorMessage(errors: ValidationErrors): any{
-    if(errors.required){
+  /**
+   * passwordのエラーハンドリング
+   * @param errors 
+   * @returns { ValidationErrors | null }
+   */
+  passwordErrorMessage(errors: ValidationErrors | null): any{
+    if(errors?.required){
       return 'パスワードの入力は必須です';
-    } else if(errors.minLength){
+    } else if(errors?.minLength){
       return `${errors.min.min}文字以上で入力してください。`
-    } else if(errors.maxLength){
-      return `${errors.maxlength.requiredLength}文字以内で入力してください。`
-    } else if(errors.oneCharacters){
+    } else if(errors?.maxLength){
+      return `${errors?.maxlength.requiredLength}文字以内で入力してください。`
+    } else if(errors?.oneCharacters){
       return '半角で入力してください。';
-    } else if(errors.alphanumerics){
+    } else if(errors?.alphanumerics){
       return '半角英数字で入力してください。';
     }
   }
