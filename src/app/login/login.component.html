@@ -1,20 +1,21 @@
 <h1>ログイン画面</h1>
 <nav>
   <a routerLink="registor">会員登録</a>
+  <a href="#">Facebookでログイン</a>
 </nav>
 
 <form class="form_login" [formGroup]="loginForm" (submit)="submit()" #createForm="ngForm">
   <p>ユーザー名：</p>
   <mat-form-field class="example-full-width" appearance="outline" placeholder="ユーザー名">
     <mat-label>username</mat-label>
-    <input type="email" matInput formControlName="username" placeholder="username"/>
+    <input matInput formControlName="username" placeholder="username"/>
     <mat-error>{{userErrorMessage(loginForm.controls.username.errors)}}</mat-error>
   </mat-form-field>
   <p>{{loginForm.controls.username.value.length}}/225</p>
   <p>パスワード：</p>
   <mat-form-field class="example-full-width" appearance="outline" placeholder="パスワード">
     <mat-label>password</mat-label>
-    <input type="email" matInput formControlName="password" placeholder="username"/>
+    <input matInput formControlName="password" placeholder="username"/>
     <mat-error>{{passwordErrorMessage(loginForm.controls.password.errors)}}</mat-error>
   </mat-form-field>
   <button (click)="reset(createForm)" type="button">リセット</button>

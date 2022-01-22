@@ -36,7 +36,15 @@ export class LoginComponent implements OnInit {
     }
   }
 
-  submit(): void{
+  //ログインフォームコントロールにアクセスする。
+  get form(){
+    return this.loginForm.controls;
+  }
+
+  submit(): any{
+    if(this.loginForm.invalid){
+      return false;
+    }
 
   }
   
