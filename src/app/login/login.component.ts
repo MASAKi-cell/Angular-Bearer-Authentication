@@ -1,7 +1,10 @@
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder,FormGroup, FormControl,Validators, ValidationErrors } from '@angular/forms';
+import { FormBuilder,FormGroup,Validators, ValidationErrors } from '@angular/forms';
+import { alphanumerics } from 'src/app/common/alphanumerics';
+import { oneCharacter } from 'src/app/common/oneCharacters';
 import { first } from 'rxjs/operators';
 import { AuthenticationService } from 'src/app/_service/authentication.service';
+
 
 @Component({
   selector: 'app-root',
@@ -18,13 +21,13 @@ export class LoginComponent implements OnInit {
 
   ngOnInit(): void {
     this.loginForm = this.fb.group({
-      username: ['',Validators.required,Validators.maxLength(225)],
-      password: ['',Validators.minLength(8),Validators.maxLength(24),this.oneCharacters as any,this.alphanumerics as any]
+      username: ['', Validators.required, Validators.maxLength(225)],
+      password: ['', Validators.minLength(8), Validators.maxLength(24), oneCharacter.format, alphanumerics.format]
     })
   }
 
   /**
-   * 
+   * 半角英字大文字, 半角英字小文字, 数字を1文字づつ以上含む
    * @param form 
    * @returns 
    */
@@ -37,16 +40,11 @@ export class LoginComponent implements OnInit {
     }
   }
 
-  alphanumerics(form: FormGroup): ValidationErrors | null{
-    const alphanumeric = /^[0-9a-zA-Z]*$/;
-    if (alphanumeric.test(form.value)) {
-      return null;
-    } else {
-      return { alphanumeric: { valid: true } };
-    }
-  }
-
-
+  /**
+   * バリデーションエラーが効いている間はsubmitボタンをクリックできない。
+   * @param error 
+   * @returns boolean
+   */
   disabled(): boolean{
     if(this.loginForm.invalid === true){
       return true;
@@ -59,7 +57,6 @@ export class LoginComponent implements OnInit {
    * @param errors 
    * @returns { ValidationErrors | null }
    */
-
   userErrorMessage(errors: ValidationErrors | null): any{
     if(errors?.required){
       return 'ユーザー名の入力は必須です。';
