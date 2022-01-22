@@ -3,7 +3,7 @@
   <a routerLink="registor">会員登録</a>
 </nav>
 
-<form class="form_login" [formGroup]="loginForm">
+<form class="form_login" [formGroup]="loginForm" (submit)="submit()" #createForm="ngForm">
   <p>ユーザー名：</p>
   <mat-form-field class="example-full-width" appearance="outline" placeholder="ユーザー名">
     <mat-label>username</mat-label>
@@ -17,6 +17,7 @@
     <input type="email" matInput formControlName="password" placeholder="username"/>
     <mat-error>{{passwordErrorMessage(loginForm.controls.password.errors)}}</mat-error>
   </mat-form-field>
-  <button mat-button type="submit" routerLink="mypagetop" [disabled]="disabled()">ログイン</button>
+  <button (click)="reset(createForm)" type="button">リセット</button>
+  <button mat-button type="button" routerLink="mypagetop" [disabled]="disabled()">ログイン</button>
 </form>
 <!-- ここまでformGroup -->

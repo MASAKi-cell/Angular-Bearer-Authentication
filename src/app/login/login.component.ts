@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder,FormGroup,Validators, ValidationErrors } from '@angular/forms';
+import { FormBuilder,FormGroup,Validators, ValidationErrors, Form } from '@angular/forms';
 import { Router, ActivatedRoute } from '@angular/router';
 import { first } from 'rxjs/operators';
 import { AuthenticationService } from 'src/app/_service/authentication.service';
@@ -34,6 +34,18 @@ export class LoginComponent implements OnInit {
     if(this.service.currentUserValue){
       this.router.navigate(['/'])
     }
+  }
+
+  submit(): void{
+
+  }
+  
+  /**
+   * リセット機能
+   * @param form 
+   */
+  reset(form: any): void{
+    form.resetForm();
   }
 
   /**
