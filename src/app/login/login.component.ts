@@ -27,20 +27,6 @@ export class LoginComponent implements OnInit {
   }
 
   /**
-   * 半角英字大文字, 半角英字小文字, 数字を1文字づつ以上含む
-   * @param form 
-   * @returns 
-   */
-  oneCharacters(form: FormGroup): ValidationErrors | null{
-    const oneCharacter = /(?=.*[0-9])(?=.*[A-Z])(?=.*[a-z])/;
-    if (oneCharacter.test(form.value)) {
-      return null;
-    } else {
-      return { oneCharacters: { valid: true } };
-    }
-  }
-
-  /**
    * バリデーションエラーが効いている間はsubmitボタンをクリックできない。
    * @param error 
    * @returns boolean
