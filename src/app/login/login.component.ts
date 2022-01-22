@@ -1,9 +1,11 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder,FormGroup,Validators, ValidationErrors } from '@angular/forms';
-import { alphanumerics } from 'src/app/common/alphanumerics';
-import { oneCharacter } from 'src/app/common/oneCharacters';
+import { Router, ActivatedRoute } from '@angular/router';
 import { first } from 'rxjs/operators';
 import { AuthenticationService } from 'src/app/_service/authentication.service';
+import { alphanumerics } from 'src/app/common/alphanumerics';
+import { oneCharacter } from 'src/app/common/oneCharacters';
+import { Route } from '@angular/compiler/src/core';
 
 
 @Component({
@@ -17,6 +19,9 @@ export class LoginComponent implements OnInit {
 
   constructor(
     private fb: FormBuilder,
+    private service: AuthenticationService,
+    private router: Router,
+    private activatedRoute: ActivatedRoute,
   ) { }
 
   ngOnInit(): void {
@@ -24,6 +29,11 @@ export class LoginComponent implements OnInit {
       username: ['', Validators.required, Validators.maxLength(225)],
       password: ['', Validators.minLength(8), Validators.maxLength(24), oneCharacter.format, alphanumerics.format]
     })
+
+    // 既にログイン済みの場合は、mypage-topに移動する。
+    if(this.service.currentUserValue){
+      this.router.navigate(['/'])
+    }
   }
 
   /**

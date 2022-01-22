@@ -17,11 +17,19 @@ export class AuthenticationService {
         this.currentUser = this.currentUserSubject.asObservable();
     }
 
+    /**
+     * @returns 
+     */
     public get currentUserValue(): User | undefined{
         return this.currentUserSubject?.value;
     }
 
-    // HTTP POSTリクエストを送信する。成功した場合はlocalStorageにJWTを保存する。
+    /**
+     * HTTP POSTリクエストを送信する。成功した場合はlocalStorageにJWTを保存する。
+     * @param username 
+     * @param password 
+     * @returns 
+     */
     login(username: string ,password:string): Observable<any>{
         return this.http.post<any>(`${environment.apiUrl}/users/authenticate`, {username,password})
         .pipe(map(user => {
@@ -31,8 +39,11 @@ export class AuthenticationService {
         }));
     }
 
+    /**
+     * localStorageからキーを削除する。
+     * @returns
+     */
     logout(){
-        //localStorageからキーを削除する。
         localStorage.removeItem('currentUser');
         this.currentUserSubject?.next(null as any);
     }
