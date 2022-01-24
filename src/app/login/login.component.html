@@ -1,24 +1,24 @@
 <h1>ログイン画面</h1>
 <nav>
-  <a routerLink="registor">会員登録</a>
-  <a href="#">Facebookでログイン</a>
+  <button mat-button mat-raised-button class="btn btn-primary" routerLink="registor">会員登録</button>
 </nav>
 
-<form class="form_login" [formGroup]="loginForm" (submit)="submit()" #createForm="ngForm">
-  <p>ユーザー名：</p>
+<form  class="form_login" [formGroup]="loginForm" (submit)="submit()" #createForm="ngForm">
+  <h4>ユーザー名</h4>
   <mat-form-field class="example-full-width" appearance="outline" placeholder="ユーザー名">
     <mat-label>username</mat-label>
     <input matInput formControlName="username" placeholder="username"/>
     <mat-error>{{userErrorMessage(loginForm.controls.username.errors)}}</mat-error>
   </mat-form-field>
   <p>{{loginForm.controls.username.value.length}}/225</p>
-  <p>パスワード：</p>
+  <h4>パスワード</h4>
   <mat-form-field class="example-full-width" appearance="outline" placeholder="パスワード">
     <mat-label>password</mat-label>
     <input matInput formControlName="password" placeholder="username"/>
     <mat-error>{{passwordErrorMessage(loginForm.controls.password.errors)}}</mat-error>
   </mat-form-field>
-  <button (click)="reset(createForm)" type="button">リセット</button>
-  <button mat-button type="button" routerLink="mypagetop" [disabled]="disabled()">ログイン</button>
+  <button mat-button mat-raised-button class="btn btn-primary" (click)="reset(createForm)" type="button">リセット</button>
+  <button mat-button type="button" mat-raised-button class="btn btn-primary" routerLink="mypagetop" [disabled]="disabled()">ログイン</button>
+  <button mat-button mat-raised-button class="btn btn-primary" type="button">Facebookでログイン</button>
 </form>
 <!-- ここまでformGroup -->
