@@ -1,4 +1,82 @@
 /* You can add global styles to this file, and also import other style files */
 
-html, body { height: 100%; }
-body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
+@import "~@angular/material/theming";
+@include mat-core();
+$app-primary: mat-palette($mat-purple);
+$app-accent: mat-palette($mat-pink);
+$app-warn: mat-palette($mat-red);
+
+// Custom Sass colors vars (will be available in all the project)
+$primary: mat-color($app-primary);
+$accent: mat-color($app-accent);
+$warn: mat-color($app-warn);
+
+$theme: mat-light-theme($app-primary, $app-accent, $app-warn);
+
+@include angular-material-theme($theme);
+
+html,
+body {
+  height: 100%;
+}
+
+//COMMON
+.row {
+  margin: 0 !important;
+  .card {
+    background: #f4eef6;
+  }
+  .mat-card {
+    margin: 16px;
+    .mat-card-content {
+      margin: 16px;
+    }
+  }
+
+  .mat-card-actions {
+    margin: 16px;
+    text-align: right;
+    display: block;
+    button {
+      font-weight: 600;
+      margin: 0 0 0 6px !important;
+      min-width: 120px !important;
+    }
+  }
+
+  .mat-button-wrapper,
+  th.mat-header-cell {
+    font-weight: 600;
+  }
+  .mat-column-sessionId,
+  .mat-column-email {
+    width: 30%;
+  }
+  .mat-column-pnr,
+  .mat-column-channel {
+    width: 10%;
+  }
+  .mat-column-firstAccessAt {
+    width: 20%;
+  }
+}
+
+.loading {
+  width: 100%;
+  .mat-spinner {
+    margin: 100px auto;
+  }
+}
+
+// list
+table {
+  width: 100%;
+}
+th.mat-header-cell {
+  font-weight: 600;
+  color: #5dc1cf;
+}
+.mat-list-base,
+.mat-list-item-content {
+  padding: 0 !important;
+}
