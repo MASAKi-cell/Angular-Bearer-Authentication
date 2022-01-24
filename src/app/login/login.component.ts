@@ -26,8 +26,8 @@ export class LoginComponent implements OnInit {
 
   ngOnInit(): void {
     this.loginForm = this.fb.group({
-      username: ['', Validators.required, Validators.maxLength(225)],
-      password: ['', Validators.minLength(8), Validators.maxLength(24), oneCharacter.format, alphanumerics.format]
+      username: ['', [Validators.required, Validators.maxLength(225)]],
+      password: ['', [Validators.minLength(8), Validators.maxLength(24), oneCharacter.format, alphanumerics.format]]
     })
 
     // 既にログイン済みの場合は、mypage-topに移動する。
