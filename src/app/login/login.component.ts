@@ -5,7 +5,7 @@ import { first } from 'rxjs/operators';
 import { AuthenticationService } from 'src/app/_service/authentication.service';
 import { alphanumerics } from 'src/app/common/alphanumerics';
 import { oneCharacter } from 'src/app/common/oneCharacters';
-import { Route } from '@angular/compiler/src/core';
+
 
 
 @Component({
@@ -28,7 +28,7 @@ export class LoginComponent implements OnInit {
   ngOnInit(): void {
     this.loginForm = this.fb.group({
       username: ['', [Validators.required, Validators.maxLength(225)]],
-      password: ['', [Validators.minLength(8), Validators.maxLength(24), oneCharacter.format, alphanumerics.format]]
+      password: ['', [Validators.required, Validators.minLength(8), Validators.maxLength(24), oneCharacter.format, alphanumerics.format]]
     })
 
     // 既にログイン済みの場合は、mypage-topに移動する。
@@ -110,7 +110,7 @@ export class LoginComponent implements OnInit {
       return 'パスワードの入力は必須です';
     } else if(errors?.minLength){
       return `${errors.min.min}文字以上で入力してください。`
-    } else if(errors?.maxLength){
+    } else if(errors?.minLength){
       return `${errors?.maxlength.requiredLength}文字以内で入力してください。`
     } else if(errors?.oneCharacters){
       return '半角で入力してください。';
