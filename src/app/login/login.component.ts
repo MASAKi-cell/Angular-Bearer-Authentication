@@ -16,6 +16,7 @@ import { Route } from '@angular/compiler/src/core';
 export class LoginComponent implements OnInit {
   public loginForm!: FormGroup;
   public loading: boolean = false;
+  public error: string = '';
 
   constructor(
     private fb: FormBuilder,
@@ -41,10 +42,28 @@ export class LoginComponent implements OnInit {
     return this.loginForm.controls;
   }
 
+  /**
+   * ログイン成功時はreturnUrlに画面遷移する。失敗した時はエラー表示される。
+   * @params なし
+   * @returns 
+   */
   submit(): any{
     if(this.loginForm.invalid){
       return false;
     }
+    
+    this.loading = true;
+    this.service.login(this.form.username.value, this.form.password.value)
+    .pipe(first()).subscribe({
+      next:() => {
+        const returnUrl = this.activatedRoute.snapshot.queryParams['returnUrl'] || '/';
+        this.router.navigate([returnUrl]);
+      },
+    error: error => {
+      this.error = error;
+      this.loading = true;
+    } 
+    })
 
   }
   
