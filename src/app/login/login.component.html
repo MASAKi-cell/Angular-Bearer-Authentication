@@ -8,15 +8,14 @@
   <mat-form-field class="example-full-width" appearance="fill">
     <mat-label>username</mat-label>
     <input matInput formControlName="username" placeholder="username"/>
-    <mat-error>{{ userErrorMessage(form.username.errors) }}</mat-error>
-    <mat-hint>{{ form.username.value.length }}/225</mat-hint>
+    <mat-error>{{ userErrorMessage(form?.username?.errors) }}</mat-error>
+    <mat-hint>{{ form?.username?.value.length }}/225</mat-hint>
   </mat-form-field>
   <mat-form-field class="example-full-width" appearance="fill">
     <mat-label>password</mat-label>
     <input matInput formControlName="password" placeholder="password"/>
-    <mat-error>{{ passwordErrorMessage(form.password.errors) }}</mat-error>
+    <mat-error>{{ passwordErrorMessage(form?.password?.errors) }}</mat-error>
   </mat-form-field>
-  <button mat-button mat-raised-button class="btn btn-primary" (click)="reset(createForm)" type="button">リセット</button>
   <button mat-button type="submit" mat-raised-button class="btn btn-primary" routerLink="mypagetop" [disabled]="disabled()">ログイン</button>
   <div *ngIf="loading"  class="alert alert-danger mt-3 mb-0">{{ error }}</div>
   <button mat-button mat-raised-button class="btn btn-primary" type="button">Facebookでログイン</button>

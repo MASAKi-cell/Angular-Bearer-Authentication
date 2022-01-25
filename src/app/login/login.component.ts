@@ -39,7 +39,7 @@ export class LoginComponent implements OnInit {
 
   //ログインフォームコントロールにアクセスする。
   get form(){
-    return this.loginForm.controls;
+    return this.loginForm?.controls;
   }
 
   /**
@@ -48,12 +48,12 @@ export class LoginComponent implements OnInit {
    * @returns 
    */
   submit(): any{
-    if(this.loginForm.invalid){
+    if(this.loginForm?.invalid){
       return false;
     }
     
     this.loading = true;
-    this.service.login(this.form.username.value, this.form.password.value)
+    this.service.login(this.form?.username.value, this.form?.password.value)
     .pipe(first()).subscribe({
       next:() => {
         const returnUrl = this.activatedRoute.snapshot.queryParams['returnUrl'] || '/';
@@ -65,14 +65,6 @@ export class LoginComponent implements OnInit {
     } 
     })
 
-  }
-  
-  /**
-   * リセット機能
-   * @param form 
-   */
-  reset(form: any): void{
-    form.resetForm();
   }
 
   /**
@@ -92,7 +84,7 @@ export class LoginComponent implements OnInit {
    * @param errors 
    * @returns { ValidationErrors | null }
    */
-  userErrorMessage(errors: ValidationErrors | null): any{
+  userErrorMessage(errors: any): any{
     if(errors?.required){
       return 'ユーザー名の入力は必須です。';
     } else if(errors?.maxLength){
@@ -105,7 +97,7 @@ export class LoginComponent implements OnInit {
    * @param errors 
    * @returns { ValidationErrors | null }
    */
-  passwordErrorMessage(errors: ValidationErrors | null): any{
+  passwordErrorMessage(errors: any): any{
     if(errors?.required){
       return 'パスワードの入力は必須です';
     } else if(errors?.maxlength){
