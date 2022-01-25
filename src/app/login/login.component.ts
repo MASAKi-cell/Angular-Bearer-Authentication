@@ -81,9 +81,9 @@ export class LoginComponent implements OnInit {
    * @returns boolean
    */
   disabled(): boolean{
-    if(this.loginForm.invalid === true){
-      return true;
-    }
+    // if(this.loginForm.invalid === true){
+      // return true;
+    // }
     return false;
   }
 
@@ -108,11 +108,11 @@ export class LoginComponent implements OnInit {
   passwordErrorMessage(errors: ValidationErrors | null): any{
     if(errors?.required){
       return 'パスワードの入力は必須です';
-    } else if(errors?.minLength){
-      return `${errors.min.min}文字以上で入力してください。`
-    } else if(errors?.minLength){
-      return `${errors?.maxlength.requiredLength}文字以内で入力してください。`
-    } else if(errors?.oneCharacters){
+    } else if(errors?.maxlength){
+      return `${errors.maxlength.requiredLength}文字以内で入力してください。`
+    } else if(errors?.minlength){
+      return `${errors?.minlength.requiredLength}文字以上で入力してください。`
+    }  else if(errors?.oneCharacters){
       return '半角で入力してください。';
     } else if(errors?.alphanumerics){
       return '半角英数字で入力してください。';

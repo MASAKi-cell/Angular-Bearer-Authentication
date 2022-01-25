@@ -17,7 +17,7 @@
     <mat-error>{{ passwordErrorMessage(form.password.errors) }}</mat-error>
   </mat-form-field>
   <button mat-button mat-raised-button class="btn btn-primary" (click)="reset(createForm)" type="button">リセット</button>
-  <button mat-button type="button" mat-raised-button class="btn btn-primary" routerLink="mypagetop" [disabled]="disabled()">ログイン</button>
+  <button mat-button type="submit" mat-raised-button class="btn btn-primary" routerLink="mypagetop" [disabled]="disabled()">ログイン</button>
   <div *ngIf="loading"  class="alert alert-danger mt-3 mb-0">{{ error }}</div>
   <button mat-button mat-raised-button class="btn btn-primary" type="button">Facebookでログイン</button>
   <button mat-button mat-raised-button class="btn btn-primary" type="button" routerLink="registor">会員登録</button>
