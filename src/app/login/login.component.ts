@@ -33,7 +33,7 @@ export class LoginComponent implements OnInit {
 
     // 既にログイン済みの場合は、mypage-topに移動する。
     if(this.service.currentUserValue){
-      this.router.navigate(['/'])
+      this.router.navigate(['mypagetop'])
     }
   }
 
@@ -42,12 +42,14 @@ export class LoginComponent implements OnInit {
     return this.loginForm?.controls;
   }
 
+  submit(){}
+
   /**
    * ログイン成功時はreturnUrlに画面遷移する。失敗した時はエラー表示される。
    * @params なし
    * @returns 
    */
-  submit(): any{
+  onSubmit(): any{
     if(this.loginForm?.invalid){
       return false;
     }
@@ -55,8 +57,8 @@ export class LoginComponent implements OnInit {
     this.loading = true;
     this.service.login(this.form?.username.value, this.form?.password.value)
     .pipe(first()).subscribe({
-      next:() => {
-        const returnUrl = this.activatedRoute.snapshot.queryParams['returnUrl'] || '/';
+      next: () => {
+        const returnUrl = this.activatedRoute.snapshot.queryParams['mypagetop'] || '/';
         this.router.navigate([returnUrl]);
       },
     error: error => {
@@ -64,7 +66,6 @@ export class LoginComponent implements OnInit {
       this.loading = true;
     } 
     })
-
   }
 
   /**
@@ -105,7 +106,7 @@ export class LoginComponent implements OnInit {
     } else if(errors?.minlength){
       return `${errors?.minlength.requiredLength}文字以上で入力してください。`
     }  else if(errors?.oneCharacters){
-      return '半角で入力してください。';
+      return '半角英数字を1文字以上含んで入力してください。';
     } else if(errors?.alphanumerics){
       return '半角英数字で入力してください。';
     }
