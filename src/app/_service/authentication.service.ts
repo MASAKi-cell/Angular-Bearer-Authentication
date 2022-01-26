@@ -28,12 +28,13 @@ export class AuthenticationService {
      * HTTP POSTリクエストを送信する。成功した場合はlocalStorageにJWTを保存する。
      * @param username 
      * @param password 
-     * @returns 
+     * @returns user
      */
-    login(username: string ,password:string): Observable<any>{
+    login(username: string ,password: string): Observable<any>{
         return this.http.post<any>(`${environment.apiUrl}/users/authenticate`, {username,password})
         .pipe(map(user => {
             localStorage.setItem('currentUser', JSON.stringify(user));
+            //usernameとpasswordを保持する。
             this.currentUserSubject?.next(user);
             return user;
         }));
@@ -41,7 +42,7 @@ export class AuthenticationService {
 
     /**
      * localStorageからキーを削除する。
-     * @returns
+     * @returns null
      */
     logout(){
         localStorage.removeItem('currentUser');
