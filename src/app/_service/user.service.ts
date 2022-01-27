@@ -4,7 +4,7 @@ import { environment } from 'src/environments/environment';
 import { User } from 'src/app/_models/user'
 
 @Injectable({ providedIn: 'root' })
-
+ 
 export class Userservice {
     constructor(private http: HttpClient){}
 
