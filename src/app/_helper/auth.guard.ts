@@ -10,13 +10,13 @@ export class AuthGuard implements CanActivate {
     ){}
 
     /**
-     * 
+     * ログイン済みユーザーであるかどうかチェックする。未ログインの場合はログイン画面に遷移する。
      * @param route 
      * @param state 
      * @returns boolean
      */
 
-    canActivate(route: ActivatedRouteSnapshot, state: RouterStateSnapshot){
+    canActivate(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): boolean{
         const currentUser = this.service.currentUserValue;
         if(currentUser){
             return true;
