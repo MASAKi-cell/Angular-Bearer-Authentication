@@ -10,6 +10,13 @@ export class ErrorInterceptor implements HttpInterceptor{
         private service: AuthenticationService
     ){}
 
+    /**
+     * APIからのHTTPレスポンスの値をチェックする。「401 Unauthorized」以外の場合もエラー表示させる。
+     * @param request 
+     * @param next 
+     * @return
+     */
+
     intercept(request: HttpRequest<any>, next: HttpHandler):Observable<HttpEvent<any>> {
         
     }
