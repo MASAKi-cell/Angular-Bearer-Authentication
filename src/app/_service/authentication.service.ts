@@ -32,7 +32,7 @@ export class AuthenticationService {
      */
     login(username: string ,password: string): Observable<any>{
         return this.http.post<any>(`${environment.apiUrl}/users/authenticate`, {username,password})
-        .pipe(map(user => {
+        .pipe(map( user => {
             localStorage.setItem('currentUser', JSON.stringify(user));
             //usernameとpasswordを保持する。
             this.currentUserSubject?.next(user);
