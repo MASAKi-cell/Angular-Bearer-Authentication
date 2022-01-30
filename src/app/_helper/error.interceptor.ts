@@ -7,17 +7,24 @@ import { AuthenticationService } from 'src/app/_service/authentication.service';
 @Injectable()
 export class ErrorInterceptor implements HttpInterceptor{
     constructor(
-        private service: AuthenticationService
+        private authenticationservice: AuthenticationService
     ){}
 
     /**
-     * APIからのHTTPレスポンスの値をチェックする。「401 Unauthorized」以外の場合もエラー表示させる。
+     * HTTPレスポンスにエラーが含まれているかチェックする。
+     * もし「401 Unauthorized」の場合は、自動的にログアウトする。それ以外のエラーはコンソールログにエラー表示させる。
      * @param request 
      * @param next 
-     * @return
+     * @return Observable
      */
-
     intercept(request: HttpRequest<any>, next: HttpHandler):Observable<HttpEvent<any>> {
-        
+        return next.handle(request).pipe(catchError( error => {
+            if(error.status === 401) {
+                this.authenticationservice.logout();
+                location.reload(); // 現在のURLを再読み込みする。
+            } 
+            const err = error.error.status.message | error.statusText;
+            return throwError(err);
+        }))
     }
 }
