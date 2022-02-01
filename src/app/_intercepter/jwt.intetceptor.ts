@@ -11,7 +11,10 @@ export class JWTInterceptor implements HttpInterceptor {
         private authenticationservice: AuthenticationService,
     ){};
 
-    intercept(req: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
+    intercept(requset: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
+        const currentUser = this.authenticationservice.currentUserValue;
+        const isLggedIn = currentUser && currentUser.token;
+        const isApiUrl = requset.url.startsWith(enviroment.apiUrl)
         throw new Error('Method not implemented.');
     }
 
