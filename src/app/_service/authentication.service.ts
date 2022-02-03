@@ -27,7 +27,7 @@ export class AuthenticationService {
   }
 
   /**
-   * HTTP POSTリクエストを送信する。成功した場合はlocalStorageにJWTを保存する。
+   * HTTP POSTリクエストを送信する。成功した場合はlocalStorageにキーを保持する。
    * @param username
    * @param password
    * @returns user
@@ -41,7 +41,6 @@ export class AuthenticationService {
       .pipe(
         map((user) => {
           localStorage.setItem('currentUser', JSON.stringify(user));
-          //usernameとpasswordを保持する。
           this.currentUserSubject?.next(user);
           return user;
         })

@@ -1,27 +1,29 @@
 import { Injectable } from '@angular/core';
-import { Router, CanActivate, ActivatedRouteSnapshot, RouterStateSnapshot } from '@angular/router';
+import {
+  Router,
+  CanActivate,
+  ActivatedRouteSnapshot,
+  RouterStateSnapshot,
+} from '@angular/router';
 import { AuthenticationService } from 'src/app/_service/authentication.service';
 
 @Injectable({ providedIn: 'root' })
 export class AuthGuard implements CanActivate {
-    constructor(
-        private router: Router,
-        private service: AuthenticationService
-    ){}
+  constructor(private router: Router, private service: AuthenticationService) {}
 
-    /**
-     * ログイン済みユーザーであるかどうかチェックする。未ログインの場合はログイン画面に遷移する。
-     * @param route 
-     * @param state 
-     * @returns boolean
-     */
-    canActivate(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): boolean{
-        const currentUser = this.service.currentUserValue;
-        if(currentUser){
-            return true;
-        }
-    
-        this.router.navigate(['/login']), { queryParams: { returnUrl: state.url } }
-        return false;
+  /**
+   * ログイン済みユーザーであるかどうかチェックする。未ログインの場合はログイン画面に遷移する。
+   * @param route
+   * @param state
+   * @returns boolean
+   */
+  canActivate(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): boolean {
+    const currentUser = this.service.currentUserValue;
+    if (currentUser) {
+      return true;
     }
+
+    this.router.navigate(['/login']), { queryParams: { returnUrl: state.url } };
+    return false;
+  }
 }
