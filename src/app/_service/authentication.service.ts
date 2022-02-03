@@ -18,7 +18,8 @@ export class AuthenticationService {
     }
 
     /**
-     * @returns 
+     * ゲッターでユーザー情報を取得
+     * @returns BehaviorSubject
      */
     public get currentUserValue(): User | undefined{
         return this.currentUserSubject?.value;
