@@ -5,6 +5,13 @@ import { delay, mergeMap, materialize, dematerialize } from 'rxjs/operators'
 
 @Injectable()
 export class backendInterceptor implements HttpInterceptor {
+
+  /**
+   * 
+   * @params requset
+   * @params next
+   * @return Observable
+   */
   intercept(
       requset: HttpRequest<any>, next: HttpHandler
   ): Observable<HttpEvent<any>> {
