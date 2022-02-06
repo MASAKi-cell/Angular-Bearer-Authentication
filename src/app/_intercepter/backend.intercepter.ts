@@ -26,7 +26,7 @@ export class backendInterceptor implements HttpInterceptor {
     .pipe(delay(500))
     .pipe(dematerialize());
 
-    // URLの末尾によって条件を分岐
+    // 指定したURLよって条件を分岐
     function handleRoute(){
       switch(true){
         case (url.endsWith('/users/authenticate') && method === 'POST'):
@@ -40,11 +40,38 @@ export class backendInterceptor implements HttpInterceptor {
     }
 
     function authenticate(){
-
+      const { username, password } = body;
     }
 
     function getUsers(){
 
     }
+
+    /**
+     * レスポンス処理を行う
+     * @param body 
+     * @returns HttpResponse
+     */
+    function ok(body?: any): any {
+      return of( new HttpResponse({ status: 200, body }));
+    }
+
+    /**
+     * HTTP Statusが401の場合、エラーメッセージを表示
+     * @returns Observable
+     */
+    function unauthorized(): Observable<never>{
+      return throwError({ status: 401, error: {message: 'Unauthorised'}});
+    }
+
+    /**
+     * エラーメッセージ処理を行う
+     * @param message 
+     * @returns Observable
+     */
+    function error(message: any): Observable<never> {
+      return throwError({ error: message });
+    }
+
   }
 }
