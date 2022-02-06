@@ -43,8 +43,18 @@ export class backendInterceptor implements HttpInterceptor {
       const { username, password } = body;
     }
 
-    function getUsers(){
-
+    /**
+     * ログイン済みかチェックする
+     * 未ログインの場合は401 Statusを返却、ログイン済みの場合は200 Statusを返却する
+     * @returns any
+     */
+    function getUsers(): any{
+      if(!isLoggedIn()) {
+        return unauthorized();
+      } else {
+        return ok(users);
+      }
+      
     }
 
     /**
@@ -52,12 +62,12 @@ export class backendInterceptor implements HttpInterceptor {
      * @param body 
      * @returns HttpResponse
      */
-    function ok(body?: any): any {
+    function ok(body?: any): any{
       return of( new HttpResponse({ status: 200, body }));
     }
 
     /**
-     * HTTP Statusが401の場合、エラーメッセージを表示
+     * HTTP Statusが401の場合、エラーメッセージを表示する
      * @returns Observable
      */
     function unauthorized(): Observable<never>{
@@ -73,5 +83,12 @@ export class backendInterceptor implements HttpInterceptor {
       return throwError({ error: message });
     }
 
+    /**
+     * ログインしているかどうかを確認する
+     * @return boolean
+     */
+    function isLoggedIn(): boolean{
+      return (headers.get('Authorization') === 'Bearer fake-jwt-token');
+    }
   }
 }
