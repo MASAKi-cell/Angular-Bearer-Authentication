@@ -15,10 +15,36 @@ export class backendInterceptor implements HttpInterceptor {
   intercept(
       requset: HttpRequest<any>, next: HttpHandler
   ): Observable<HttpEvent<any>> {
+
+    // リクエストの内容を格納
     const { url, method, headers, body } = requset;
 
+    // 通知処理
     return of(null)
     .pipe(mergeMap(handleRoute))
-    .pipe()
+    .pipe(materialize)
+    .pipe(delay(500))
+    .pipe(dematerialize());
+
+    // URLの末尾によって条件を分岐
+    function handleRoute(){
+      switch(true){
+        case (url.endsWith('/users/authenticate') && method === 'POST'):
+          return authenticate();
+        case (url.endsWith('/users') && method === 'GET'):
+          return getUsers();
+        default:
+          next.handle(requset);
+      }
+
+    }
+
+    function authenticate(){
+
+    }
+
+    function getUsers(){
+
+    }
   }
 }
