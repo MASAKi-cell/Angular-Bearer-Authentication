@@ -3,6 +3,8 @@ import { Injectable } from '@angular/core';
 import { Observable, of, throwError } from 'rxjs';
 import { delay, mergeMap, materialize, dematerialize } from 'rxjs/operators'
 
+const users = [{ id: 1, username: 'test', password: 'test', firstName: 'Test', lastName: 'User' }];
+
 @Injectable()
 export class backendInterceptor implements HttpInterceptor {
 
@@ -36,11 +38,23 @@ export class backendInterceptor implements HttpInterceptor {
         default:
           next.handle(requset);
       }
-
     }
 
-    function authenticate(){
+
+    function authenticate(): any{
       const { username, password } = body;
+      const user = users.find(x => x.username === username && x.password === password);
+
+      if(!user) {
+        return error('ユーザー名もしくはパスワードが正しくありません。');
+      } else {
+        ok({
+          id: user.id,
+          username: user.firstName,
+          lastName: user.lastName,
+          token: 'fake-jwt-token'
+        })
+      }
     }
 
     /**
@@ -62,7 +76,7 @@ export class backendInterceptor implements HttpInterceptor {
      * @param body 
      * @returns HttpResponse
      */
-    function ok(body?: any): any{
+    function ok(body?: any): Observable<HttpResponse<any>>{
       return of( new HttpResponse({ status: 200, body }));
     }
 
