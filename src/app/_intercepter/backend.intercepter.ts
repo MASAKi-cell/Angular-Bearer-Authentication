@@ -24,7 +24,7 @@ export class backendInterceptor implements HttpInterceptor {
     // 通知処理
     return of(null)
     .pipe(mergeMap(handleRoute))
-    .pipe(materialize)
+    .pipe(materialize())
     .pipe(delay(500))
     .pipe(dematerialize());
 
