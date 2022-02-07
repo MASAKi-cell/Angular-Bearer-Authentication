@@ -13,17 +13,20 @@ import { AuthenticationService } from '../_service/authentication.service';
 export class JWTInterceptor implements HttpInterceptor {
   constructor(private authenticationservice: AuthenticationService) {}
 
-  intercept(
-    requset: HttpRequest<any>,
-    next: HttpHandler
-  ): Observable<HttpEvent<any>> {
+  /**
+   * Bearer認証の処理
+   * @param requset 
+   * @param next 
+   * @returns requset
+   */
+  intercept(requset: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
     const currentUser = this.authenticationservice.currentUserValue;
     const isLoggedIn = currentUser && currentUser.token;
     const isApiUrl = requset.url.startsWith(environment.apiUrl);
+
     if (isLoggedIn && isApiUrl) {
       requset = requset.clone({
         setHeaders: {
-          // to add headers to the requset in the interceptor
           Authorization: `Bearer $ { currentUser.token }`,
         },
       });
