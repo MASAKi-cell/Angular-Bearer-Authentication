@@ -26,7 +26,7 @@ export class backendInterceptor implements HttpInterceptor {
     .pipe(mergeMap(handleRoute))
     .pipe(materialize())
     .pipe(delay(500))
-    .pipe(dematerialize());
+    .pipe(dematerialize<any>());
 
     // 指定したURLよって条件を分岐
     function handleRoute(){
