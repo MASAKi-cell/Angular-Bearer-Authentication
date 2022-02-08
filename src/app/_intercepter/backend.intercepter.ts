@@ -15,7 +15,7 @@ const users = [
   {
     id: 1,
     username: 'test',
-    password: 'test',
+    password: 'test2020D',
     firstName: 'Test',
     lastName: 'User',
   },
