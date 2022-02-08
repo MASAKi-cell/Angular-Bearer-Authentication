@@ -4,7 +4,7 @@ import { JWTInterceptor } from 'src/app/_intercepter/jwt.intetceptor';
 import { backendInterceptor } from 'src/app/_intercepter/backend.intercepter';
 
 export const HttpInterceptorProviders = [
-  { provide: HTTP_INTERCEPTORS, userClass: JWTInterceptor, multi: true},
+  { provide: HTTP_INTERCEPTORS, useClass: JWTInterceptor, multi: true},
   { provide: HTTP_INTERCEPTORS, useClass: ErrorInterceptor, multi: true },
   { provaide: HTTP_INTERCEPTORS, useClass: backendInterceptor, multi: true }
 ];
