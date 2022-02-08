@@ -1,15 +1,13 @@
 import { Injectable } from '@angular/core';
-import {
-  Router,
-  CanActivate,
-  ActivatedRouteSnapshot,
-  RouterStateSnapshot,
-} from '@angular/router';
+import { Router, CanActivate, ActivatedRouteSnapshot, RouterStateSnapshot, } from '@angular/router';
 import { AuthenticationService } from 'src/app/_service/authentication.service';
 
 @Injectable({ providedIn: 'root' })
 export class AuthGuard implements CanActivate {
-  constructor(private router: Router, private service: AuthenticationService) {}
+  constructor(
+    private router: Router, 
+    private authenticationService: AuthenticationService
+    ) {}
 
   /**
    * ログイン済みユーザーであるかどうかチェックする。未ログインの場合はログイン画面に遷移する。
@@ -18,7 +16,7 @@ export class AuthGuard implements CanActivate {
    * @returns boolean
    */
   canActivate(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): boolean {
-    const currentUser = this.service.currentUserValue;
+    const currentUser = this.authenticationService.currentUserValue;
     if (currentUser) {
       return true;
     }
