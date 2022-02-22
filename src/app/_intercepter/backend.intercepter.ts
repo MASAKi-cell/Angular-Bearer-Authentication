@@ -1,11 +1,4 @@
-import {
-  HttpRequest,
-  HttpResponse,
-  HttpHandler,
-  HttpEvent,
-  HttpInterceptor,
-  HTTP_INTERCEPTORS,
-} from '@angular/common/http';
+import { HttpRequest, HttpResponse, HttpHandler, HttpEvent, HttpInterceptor, } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable, of, throwError } from 'rxjs';
 import { delay, mergeMap, materialize, dematerialize } from 'rxjs/operators';
@@ -44,7 +37,7 @@ export class backendInterceptor implements HttpInterceptor {
 
     /**
      * 指定したURLよって条件を分岐させる
-     * @returns 
+     * @returns リクエスト
      */
     function handleRoute() {
       switch (true) {
@@ -58,9 +51,9 @@ export class backendInterceptor implements HttpInterceptor {
     }
 
     /**
-     * 入力したユーザー名、パスワードが正しいか確認する
+     * 入力しされたユーザー名、パスワードが設定済みのユーザー名、パスワードと一致するか確認
      * 異なる場合はエラーメッセージを表示、正しい場合は200 Statusを返す
-     * @returns methods
+     * @returns エラーメッセージもしくはStatus200のレスポンス
      */
     function authenticate(): any {
       const { username, password } = body;
@@ -113,18 +106,19 @@ export class backendInterceptor implements HttpInterceptor {
     /**
      * エラーメッセージ処理を行う
      * @param message
-     * @returns Observable
+     * @returns エラーメッセージ
      */
     function error(message: any): Observable<never> {
       return throwError({ error: message });
     }
 
     /**
-     * ログインしているかどうかを確認する
-     * @return boolean
+     * ログインしているかどうかを確認
+     * @return true or false
      */
     function isLoggedIn(): boolean {
       return headers.get('Authorization') === 'Bearer fake-jwt-token';
     }
   }
+  
 }
