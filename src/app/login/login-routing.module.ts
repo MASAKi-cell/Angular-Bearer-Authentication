@@ -8,11 +8,6 @@ const routes: Routes = [
     path: 'mypagetop',
     loadChildren: () =>
       import('./mypage-top/mypage-top.module').then((m) => m.mypagetopModule),
-  },
-  {
-    path: 'registor',
-    loadChildren: () =>
-      import('./registor/registor.module').then((m) => m.RegistorModule),
   }
 ];
 

@@ -4,11 +4,6 @@ import { RouterModule, Routes } from '@angular/router';
 
 const routes: Routes = [
   { path: '', component: MypageTopComponent },
-  {
-    path: 'regist',
-    loadChildren: () =>
-      import('./regist/regist.module').then((m) => m.RegistModule),
-  },
 ];
 
 @NgModule({

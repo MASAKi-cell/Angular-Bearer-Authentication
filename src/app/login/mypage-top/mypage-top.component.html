@@ -1,7 +1,4 @@
 <h1>ログイン完了画面</h1>
-<nav>
-  <a routerLink="regist">会員情報変更</a>
-</nav>
 <div *ngIF="loading"></div>
 <ul *ngIf="users">
   <li *ngFor="let user of users">{{user.firstName}}{{user.lastName}}</li>
