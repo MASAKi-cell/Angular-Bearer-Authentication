@@ -30,7 +30,7 @@ export class ErrorInterceptor implements HttpInterceptor {
           this.authenticationservice.logout();
           location.reload(); // 現在のURLを再読み込みする。
         }
-        const err = error.error.status.message | error.statusText;
+        const err = error.error.message | error.statusText;
         return throwError(err);
       })
     );
