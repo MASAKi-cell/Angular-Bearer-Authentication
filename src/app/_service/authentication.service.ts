@@ -8,7 +8,7 @@ import { User } from 'src/app/_models/user';
 @Injectable({ providedIn: 'root' })
 export class AuthenticationService {
   private currentUserSubject?: BehaviorSubject<User>;
-  private currentUser?: Observable<User>;
+  public currentUser?: Observable<User>;
 
   constructor(private http: HttpClient) {
     // currentUserキーに対する値を保持する。

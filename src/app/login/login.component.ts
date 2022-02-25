@@ -77,9 +77,9 @@ export class LoginComponent implements OnInit {
    * @returns boolean
    */
   disabled(): boolean {
-    // if(this.loginForm.invalid === true){
-    // return true;
-    // }
+    if(this.loginForm.invalid === true){
+      return true;
+    }
     return false;
   }
 
