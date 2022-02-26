@@ -5,13 +5,15 @@ import { map } from 'rxjs/operators';
 import { environment } from 'src/environments/environment';
 import { User } from 'src/app/_models/user';
 
-@Injectable({ providedIn: 'root' })
+@Injectable({ 
+  providedIn: 'root' 
+})
 export class AuthenticationService {
-  private currentUserSubject?: BehaviorSubject<User>;
-  public currentUser?: Observable<User>;
+
+  private currentUserSubject: BehaviorSubject<User>;
+  public currentUser: Observable<User>;
 
   constructor(private http: HttpClient) {
-    // currentUserキーに対する値を保持する。
     this.currentUserSubject = new BehaviorSubject<User>(
       JSON.parse(localStorage.getItem('currentUser') as any)
     );
@@ -48,7 +50,7 @@ export class AuthenticationService {
   }
 
   /**
-   * localStorageからキーを削除する。
+   * localStorageからuser情報を削除する。
    * @returns null
    */
   logout() {
