@@ -5,13 +5,15 @@ import { BrowserModule } from '@angular/platform-browser';
 import { ReactiveFormsModule } from '@angular/forms';
 import { AppRoutingModule } from './app-routing.module';
 import { HttpClientModule } from '@angular/common/http';
-import { HttpInterceptorProviders } from 'src/app/_intercepter/index';
 import { AppComponent } from './app.component';
 import { LoginComponent } from './login/login.component';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatButtonModule } from '@angular/material/button';
 import { MatInputModule } from '@angular/material/input';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
+
+import { HttpInterceptorProviders } from 'src/app/_intercepter/index';
+
 
 @NgModule({
   declarations: [
