@@ -25,6 +25,7 @@ export class LoginComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
+    
     this.loginForm = this.fb.group({
       username: ['', [Validators.required, Validators.maxLength(225)]],
       password: ['', [Validators.required, Validators.minLength(8), Validators.maxLength(24), oneCharacter.format, alphanumerics.format],],
@@ -60,9 +61,9 @@ export class LoginComponent implements OnInit {
       .pipe(first())
       .subscribe({
         next: () => {
-          const returnUrl =
-            this.activatedRoute.snapshot.queryParams['returnUrl'] || 'mypagetop';
-          this.router.navigate([returnUrl]);
+          // const returnUrl =
+          //   this.activatedRoute.snapshot.queryParams['returnUrl'] || 'mypagetop';
+          this.router.navigate(['mypagetop']);
         },
         error: (error) => {
           this.error = error;

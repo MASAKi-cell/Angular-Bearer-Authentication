@@ -15,6 +15,7 @@ export class JWTInterceptor implements HttpInterceptor {
    * @returns requset
    */
   intercept(requset: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
+    
     const currentUser = this.authenticationservice.currentUserValue;
     const isLoggedIn = currentUser && currentUser.token;
     const isApiUrl = requset.url.startsWith(environment.apiUrl);
