@@ -1,5 +1,5 @@
-import { HttpRequest, HttpResponse, HttpHandler, HttpEvent, HttpInterceptor, HTTP_INTERCEPTORS, } from '@angular/common/http';
 import { Injectable } from '@angular/core';
+import { HttpRequest, HttpResponse, HttpHandler, HttpEvent, HttpInterceptor, HTTP_INTERCEPTORS, } from '@angular/common/http';
 import { Observable, of, throwError } from 'rxjs';
 import { delay, mergeMap, materialize, dematerialize } from 'rxjs/operators';
 
@@ -18,7 +18,7 @@ const users = [
 export class backendInterceptor implements HttpInterceptor {
 
   /**
-   *
+   * バックエンド処理
    * @params requset
    * @params next
    * @return Observable
@@ -64,7 +64,7 @@ export class backendInterceptor implements HttpInterceptor {
       if (!user) {
         return error('ユーザー名もしくはパスワードが正しくありません。');
       } else {
-        ok({
+        return ok({
           id: user.id,
           username: user.firstName,
           lastName: user.lastName,
