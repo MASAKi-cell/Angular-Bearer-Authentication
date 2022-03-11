@@ -1,5 +1,5 @@
 <h2>Angular-JWT-App</h2>
-<nav *ngIf="currentUser">
+<nav *ngIf="!currentUser">
     <div>
         <a routerLink="/" routerLinkActive="active">Home</a>
         <a (click)="logout()">Logout</a>
